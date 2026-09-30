@@ -3,6 +3,8 @@
 Bloopair allows connecting controllers from other consoles like native Wii U Pro Controllers on the Wii U.  
 It temporarily applies patches to the IOS-PAD module responsible for Bluetooth controller connections.
 
+> For this fork's Switch Pro support in GameCube games, follow [Switch Pro in Nintendont](#switch-pro-in-nintendont). It requires the companion Nintendont fork as well as this Bloopair build.
+
 ## Features
 - Connect up to 7 controllers wirelessly via Bluetooth
 - Rumble support
@@ -35,26 +37,81 @@ Make sure you're using Aroma or Tiramisu. Follow https://wiiu.hacks.guide/#/ to 
 
 If a controller had been paired in the past, simply turn it on again and it should reconnect.
 
-### Nintendont (Aroma)
+### Switch Pro in Nintendont
 
-The Aroma package includes `bloopair_nintendont_sync.wps`. For original
-Nintendo Switch Pro Controllers it keeps
-`sd:/wiiu/bloopair/nintendont-switch-pro.bin` synchronized automatically.
-After pairing through Bloopair, start vWii/Nintendont normally; no export or
-copy step is required. Up to four pairings are retained, re-pairing replaces
-the old key, and removing a controller from the Wii U pairing database removes
-its exported entry. Storage failures keep the last valid record when possible
-and are retried later without blocking normal Wii U use indefinitely.
+This fork lets original **Nintendo Switch 1 Pro Controllers** paired on a Wii U
+reconnect wirelessly in GameCube games through the companion Nintendont fork.
+It requires **Aroma**, an SD card left in the Wii U, and both matching fork
+builds. It does not add Nintendont support for Switch 2 Pro Controllers,
+Joy-Con or third-party Switch controllers. Other controllers remain usable in
+Bloopair and do not consume an export slot.
 
-The file contains the Wii U Bluetooth address and, per controller, its address,
-Bluetooth link key, key type and USB identity. Nintendont needs those values to
-authenticate an incoming reconnect after IOSU/Bloopair is no longer running.
-The sync plugin never logs these values and writes through a temporary file.
-The SD card itself provides no per-file secret protection, so treat the pairing
-file like other local console credentials and do not publish or share it.
+#### Download the matching prereleases
 
-Tiramisu does not provide Aroma's Wii U Plugin System, so automatic handoff is
-available only on Aroma.
+The hardware-tested source pair is:
+
+| Component | Tested commit | Draft prerelease |
+| --- | --- | --- |
+| Bloopair, sync plugin and Koopair | `479479b` | [`switch-pro-nintendont-v0.1.0-rc1`](https://github.com/GerwinVerkerk/Bloopair/releases/tag/switch-pro-nintendont-v0.1.0-rc1) |
+| Nintendont | `889420e` | [`switch-pro-bloopair-v0.1.0-rc1`](https://github.com/GerwinVerkerk/Nintendont/releases/tag/switch-pro-bloopair-v0.1.0-rc1) |
+
+These releases are currently **drafts**. Their downloads are not publicly
+available until the fork maintainer publishes them. Do not mix either package
+with an upstream release or a different fork build.
+
+#### Install on the SD card
+
+Back up existing files, then extract both installation ZIPs to the root of the
+same SD card. The resulting paths must be:
+
+| File | Destination |
+| --- | --- |
+| `30_bloopair.rpx` | `sd:/wiiu/environments/aroma/modules/setup/30_bloopair.rpx` |
+| `bloopair_nintendont_sync.wps` | `sd:/wiiu/environments/aroma/plugins/bloopair_nintendont_sync.wps` |
+| `Koopair.wuhb` | `sd:/wiiu/apps/Koopair/Koopair.wuhb` |
+| Nintendont `boot.dol` | `sd:/apps/Nintendont/boot.dol` |
+| Nintendont `meta.xml` and `icon.png` | `sd:/apps/Nintendont/` |
+
+Do not leave a second active copy of the module or plugin under another name.
+Fully restart the Wii U after installation so Aroma loads the new components.
+
+#### Pair and play
+
+1. In the Wii U menu, pair each original Switch 1 Pro Controller normally with
+   the console and controller SYNC buttons. Existing working pairings can stay.
+2. Start vWii/Nintendont and a GameCube game. If using another loader, verify
+   that it starts `sd:/apps/Nintendont/boot.dol` from this fork.
+3. In the game, press **A** on each Switch Pro to reconnect.
+
+No Manual export, file copy or controller setting is required. The Aroma plugin
+automatically maintains `sd:/wiiu/bloopair/nintendont-switch-pro.bin`, and
+Nintendont reads that file when it starts. Keep the SD card inserted. The file
+contains Bluetooth authentication keys and must not be shared.
+
+Up to four supported pairings can be exported. Player LEDs follow the assigned
+GameCube channel: player 1 lights LED 1, player 2 lights LEDs 1+2, player 3
+lights 1+2+3, and player 4 lights all four. A physical GameCube controller can
+take an earlier channel and move the Bluetooth controllers to later channels.
+
+#### Troubleshooting
+
+- Confirm that each Switch Pro works in the Wii U menu first.
+- Verify all five installation paths, that the sync plugin is enabled, and that
+  the SD card is writable; then fully restart the Wii U.
+- Confirm that the game launcher uses this fork's Nintendont `boot.dol`.
+- Return to Wii U mode, reconnect the controller there, then start Nintendont
+  again. Nintendont reads the handoff only at startup.
+- Never publish the handoff file or use Manual export for this integration.
+
+The cleaned builds were hardware-tested with two simultaneous Switch Pro
+Controllers in Mario Kart: Double Dash!!, a searching PowerA in different
+activation orders, correct player LEDs and input, and reassignment when a
+physical GameCube controller takes adapter port 1. Four simultaneous Switch Pro
+Controllers were not tested.
+
+This is a fork-specific integration. Compatibility with Bloopair's announced
+upstream SD pairing storage has not yet been established. The automatic route
+requires Aroma on Wii U; it is not available on Tiramisu or an original Wii.
 
 ## Koopair
 Koopair is the Bloopair companion app which comes with Bloopair.  
