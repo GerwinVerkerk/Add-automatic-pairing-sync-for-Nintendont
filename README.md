@@ -23,6 +23,11 @@ To pair a DualShock 3 to the console, see the [Pairing a DualShock 3](#pairing-a
 - Sony DualSense Controller
 
 ## Installation
+> **Switch Pro in Nintendont:** do not use the upstream download below. Install
+> both matching fork prerelease packages listed in
+> [Switch Pro in Nintendont](#switch-pro-in-nintendont). The upstream package
+> and older repository binaries do not contain the complete integration.
+
 - Download and extract the latest .zip from the [releases page](https://github.com/GaryOderNichts/Bloopair/releases).
 - Copy the `30_bloopair.rpx` from the .zip file to the `modules/setup/` folder of your target environment on the SD Card.  
   This would be `wiiu/environments/aroma/modules/setup/` for Aroma.
@@ -50,14 +55,13 @@ Bloopair and do not consume an export slot.
 
 The hardware-tested source pair is:
 
-| Component | Tested commit | Draft prerelease |
+| Component | Tested commit | Prerelease |
 | --- | --- | --- |
 | Bloopair, sync plugin and Koopair | `479479b` | [`switch-pro-nintendont-v0.1.0-rc1`](https://github.com/GerwinVerkerk/Bloopair/releases/tag/switch-pro-nintendont-v0.1.0-rc1) |
 | Nintendont | `889420e` | [`switch-pro-bloopair-v0.1.0-rc1`](https://github.com/GerwinVerkerk/Nintendont/releases/tag/switch-pro-bloopair-v0.1.0-rc1) |
 
-These releases are currently **drafts**. Their downloads are not publicly
-available until the fork maintainer publishes them. Do not mix either package
-with an upstream release or a different fork build.
+Download and install both prereleases. Do not mix either package with an
+upstream release, an older repository binary or a different fork build.
 
 #### Install on the SD card
 
