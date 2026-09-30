@@ -1,3 +1,28 @@
+## This fork: Switch Pro Controllers in Nintendont
+
+This fork lets original **Nintendo Switch 1 Pro Controllers** paired through
+Bloopair reconnect wirelessly in Nintendont GameCube games on a Wii U.
+
+**Requirements:** a Wii U running **Aroma**, an SD card, original Switch 1 Pro
+Controllers, and **both matching fork release packages**:
+
+- **[Download Bloopair + sync plugin + Koopair](https://github.com/GerwinVerkerk/Bloopair/releases/download/switch-pro-nintendont-v0.1.0-rc1/Bloopair-Switch-Pro-Nintendont-v0.1.0-rc1.zip)**
+- **[Download matching Nintendont](https://github.com/GerwinVerkerk/Nintendont/releases/download/switch-pro-bloopair-v0.1.0-rc1/Nintendont-Switch-Pro-Bloopair-v0.1.0-rc1.zip)**
+
+Back up the files already on the SD card, extract **both ZIPs to the SD root**,
+and fully restart the Wii U. Pair each controller normally in the Wii U menu.
+Start a GameCube game through Nintendont, then press **A** on each Switch Pro to
+reconnect. No Manual export or extra controller configuration is required.
+
+See the [full installation guide and implementation source](https://github.com/GerwinVerkerk/Bloopair/tree/feature/nintendont-pairing-export#switch-pro-in-nintendont)
+on the [`feature/nintendont-pairing-export`](https://github.com/GerwinVerkerk/Bloopair/tree/feature/nintendont-pairing-export)
+branch. This is a fork-specific integration; the upstream downloads and older
+repository binaries described below do not contain the complete feature.
+
+---
+
+## Upstream project documentation
+
 ![Banner](Bloopair.png?raw=true)
 # Bloopair
 Bloopair allows connecting controllers from other consoles like native Wii U Pro Controllers on the Wii U.  
