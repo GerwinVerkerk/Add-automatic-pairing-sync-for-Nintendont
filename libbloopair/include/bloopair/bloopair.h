@@ -148,8 +148,6 @@ IOSError Bloopair_AddControllerPairing(IOSHandle handle, const uint8_t* bda, con
  */
 IOSError Bloopair_GetControllerInformation(IOSHandle handle, WPADChan chan, BloopairControllerInformationData* outData);
 
-IOSError Bloopair_GetControllerPairing(IOSHandle handle, WPADChan chan, BloopairControllerPairingData* outData);
-
 /** Returns non-secret metadata for original Switch Pro Controllers that remain paired. */
 IOSError Bloopair_GetStoredSwitchProControllers(IOSHandle handle, BloopairStoredSwitchProList* outData);
 

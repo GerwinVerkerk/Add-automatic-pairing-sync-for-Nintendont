@@ -56,11 +56,11 @@ Bloopair runtime dependency.
    it performs no enumeration and no filesystem I/O while unchanged.
 5. On plugin/application start, and only after a generation change, a
    metadata-only IPC call enumerates original Switch Pro addresses still in
-   the Wii U device table. A second call returns a cached key only for one of
-   those validated addresses. Both calls require the complete supported
-   identity: Switch metadata plus Nintendo VID/PID `057e:2009`. Unknown or
-   third-party metadata is not exportable and is filtered before the four-entry
-   limit; later definitive metadata changes the generation and retries sync.
+   the Wii U device table. Enumeration requires the complete supported identity:
+   Switch metadata plus Nintendo VID/PID `057e:2009`, and applies that filter
+   before the four-entry limit. A second call returns a cached key by one of the
+   enumerated addresses. Unknown or third-party metadata is not exportable;
+   later definitive metadata changes the generation and retries sync.
 6. The plugin merges up to four entries, replaces re-paired keys, removes
    deleted devices, and writes a checksummed v3 record only when its bytes
    changed. It writes a temporary file, calls `fflush()` and `fsync()`, closes

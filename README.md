@@ -53,8 +53,8 @@ The sync plugin never logs these values and writes through a temporary file.
 The SD card itself provides no per-file secret protection, so treat the pairing
 file like other local console credentials and do not publish or share it.
 
-Tiramisu does not provide Aroma's Wii U Plugin System. Koopair therefore keeps
-the manual **Nintendont Pairing** fallback for that environment.
+Tiramisu does not provide Aroma's Wii U Plugin System, so automatic handoff is
+available only on Aroma.
 
 ## Koopair
 Koopair is the Bloopair companion app which comes with Bloopair.  
